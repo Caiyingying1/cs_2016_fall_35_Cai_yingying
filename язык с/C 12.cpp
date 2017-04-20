@@ -9,5 +9,5 @@ int main()
     else if ( str[k]==str[i] ) n++;
     i++;
   }
-  printf("MAX%c£¬LOCATION%d£¬frequency%d\n",str[k],k,n);
+  printf("MAX%c  LOCATION%d  frequency%d\n",str[k],k,n);
 }
