@@ -1,11 +1,26 @@
+
 #include <stdio.h>
+int pow(int k,int j)
+
+{
+
+    int i ,x=1;
+
+    for(i=0;i<j;++i)
+
+        x=x*k;
+
+    k=x;
+    return k;
+
+}
 int main()
 {
-   int a,b;
+   int a,b,p;
    char c;
    while(
 
-  printf("ÇëÊäÈë1¸öÊ½×Ó(ÊäÈëqÍË³ö)£º\n"),
+  printf("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð¾Ñ€Ð¼ÑƒÐ»Ñƒï¼š\n"),
   scanf("%d%c%d",&a,&c,&b)==3
   )
    {
@@ -14,6 +29,15 @@ int main()
   else if(c=='-') printf("%d\n",a-b);
   else if(c=='*') printf("%d\n",a*b);
   else if(c=='/') printf("%d\n",a/b);
-   }
+ Â else if(c=='%') printf("%d\n",a%b);
+  else if(c=='^') 
+   {
+
+	p=pow(a,b);
+
+	printf("%d",p);
+
+	}
+     }
    return 0;
 }
