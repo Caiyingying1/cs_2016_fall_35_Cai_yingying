@@ -1,13 +1,69 @@
-#include<stdio.h>
-int main()
-{ char str[256];
-  int i,k,n;
-  gets(str);
-  i=0; k=0; n=1;
-  while ( str[i] )
-  { if ( str[k]<str[i] ) { k=i; n=1; }
-    else if ( str[k]==str[i] ) n++;
-    i++;
-  }
-  printf("MAX%c  LOCATION%d  frequency%d\n",str[k],k,n);
+#include <stdio.h>
+
+#define MAXHIST 20  
+#define MAXLEN 10   
+#define IN 1
+#define OUT 0
+
+void main()
+{
+    int i = 0;
+    int j = 0;
+    int c = 0;
+    int count = 0;
+    int overflow = 0;
+    int state = OUT;
+    int wlenth[MAXLEN];
+    for (i = 0; i < MAXLEN; i++)
+    {
+        wlenth[i] = 0;
+    }
+
+    while ((c = getchar()) != '\n') 
+    {
+        if (c == ' ' || c == '\t')
+        {
+            state = OUT;
+            if (count > 0)   
+            {
+                if (count <= MAXLEN)
+                    wlenth[count - 1]++;
+                else
+                    overflow++;
+                count = 0;
+            }
+        }
+        else if (state == OUT)  
+        {
+            state = IN;
+            count = 1;  
+        }
+        else
+            count++;  
+    }
+
+    printf("overflow - %2d: ", overflow);   
+    if (overflow > MAXHIST)
+        printf("OVER THE MAXHIST");
+    else
+    {
+        for (i = 0; i < overflow; i++)
+        {
+            putchar('*');
+        }
+    }
+    putchar('\n');
+
+    for (i = 0; i < MAXLEN; i++) //输出各长度的单词数直方图
+    {
+        printf("lenth%3d - %2d: ", i + 1, wlenth[i]);
+        if (wlenth[i] >= MAXHIST)
+            printf("OVER THE MAXHIST");
+        else
+        {
+            for (j = 0; j < wlenth[i]; j++)
+                putchar('*');
+        }
+        putchar('\n');
+    }
 }
