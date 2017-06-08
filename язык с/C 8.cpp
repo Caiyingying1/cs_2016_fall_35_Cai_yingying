@@ -1,14 +1,32 @@
-# include<stdio.h>
-# include<math.h>
-int calculate(int a,int b, int c) ;
-int main(){
-double a,b,c;
-printf("Please input a,b,c:\n");
-scanf("%d%d%d",&a,&b,&c);    
-if(b*b-4*a*c<0)
-printf("NO result!\n");
-else
-printf("x1=%lf\nx2=%lf\n",(sqrt(b*b-4*a*c)-b)/(2*a),(-b-sqrt(b*b-4*a*c))/(2*a)); 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    float a,b,c,l,t,x1,x2;
+  
+     printf("input three numbers\n");
+     scanf("%f%f%f",&a,&b,&c);
+    
+     t=b*b-4*a*c;
+
+     if(t>0)
+      {
+    x1=(-b+sqrt(t))/(2*a);
+       x2=(-b-sqrt(t))/(2*a);
+       printf("%f\n%f\n",x1,x2);
+   } 
+     else if(t==0)
+      {
+    x1=-(b/(2*a));
+       printf("%f\n%f\n",x1,x1);
+   }
+     else
+      {
+    l=sqrt(-t)/2/a;
+    t=-b/2/a;
+    printf("%f%+fi\n%f%+fi",t,l,t,-l);
+   }
 return 0;
 }
-
