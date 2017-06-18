@@ -16,8 +16,6 @@ int main()
     printf("%d\n", rightrot(x, n));
     return 0;
 }
-
-/*§ã§é§Ú§ä§Ñ§Ö§Ş §Ü§à§İ§Ú§é§Ö§ã§ä§Ó§à §Ù§Ñ§ß§ñ§ä§í§ç §Ò§Ú§ä§à§Ó*/
 int countbits(unsigned x)
 {
     int count;
@@ -25,15 +23,13 @@ int countbits(unsigned x)
         x/=2;
     return count;
 }
-
-/*rightrot(x, n)*/
 unsigned  int rightrot(unsigned int x, int n)
 {
     int bit, i;
     i = countbits(x);
     if(n>i)
         n %=i;
-    bit = (x&((~((~0>>n)<<n))))<<(countbits(x)-n);//§Ù§Ñ§á§à§Ş§Ú§ß§Ñ§Ö§Ş n §Ò§Ú§ä
+    bit = (x&((~((~0>>n)<<n))))<<(countbits(x)-n);
     return (x>>n)|bit;
     
 }
