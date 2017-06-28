@@ -1,35 +1,65 @@
-#include <stdio.h> 
+#include <stdio.h>
 
-main() 
+#include <string.h>
 
-{ 
 
-int n=0,i,j; 
 
-char a[20]; 
+char reverse( char *c)
 
-printf("write sentence£º\n"); 
+    {
 
-for(i=0;a[i-1]!='\n';i++) 
+    int k=0,i;
 
-{ 
+    char b[1000];
 
-scanf("%c",&a[i]); 
+    for(i=strlen(c)-1;i>=0;--i)
 
-n++; 
+    {
 
-} 
+        b[k]=c[i];
 
-printf("input£º\n"); 
+    k++;
 
-for(i=n-2;i!=-1;i--) 
+    }
 
-{ 
+    for(i=0;c[i]!='\0';++i)
 
-printf("%c",*(a+i)); 
+    {
 
-} 
+        c[i]=b[i];
 
-putchar('\n'); 
+    }
 
-} 
+    return *c;
+
+}
+
+
+
+int main()
+
+{
+
+    int i;
+
+    char a[1000];
+
+	printf("Введите строку\n");
+
+    gets(a);
+
+    reverse(a);
+
+    for( i=0;a[i]!='\0';++i)
+
+    {
+
+        printf("%c",a[i]);
+
+    }
+
+	printf("\n");
+
+    return 0;
+
+}
