@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 int pow(int k,int j)
 
@@ -20,7 +19,7 @@ int main()
    char c;
    while(
 
-  printf("Введите формулу：\n"),
+  printf(" input operation \n"),
   scanf("%d%c%d",&a,&c,&b)==3
   )
    {
@@ -29,7 +28,7 @@ int main()
   else if(c=='-') printf("%d\n",a-b);
   else if(c=='*') printf("%d\n",a*b);
   else if(c=='/') printf("%d\n",a/b);
-  else if(c=='%') printf("%d\n",a%b);
+  else if(c=='%') printf("%d\n",a%b);
   else if(c=='^') 
    {
 
