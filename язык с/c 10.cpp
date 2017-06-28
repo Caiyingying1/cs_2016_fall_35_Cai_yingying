@@ -1,35 +1,50 @@
 
 #include <stdio.h>
 
-unsigned int rightrot(unsigned int x, int n);
-int countbits(unsigned x);
+#include <stdlib.h>
 
-int main()
+#include <stdio.h>
+
+unsigned rightrot(unsigned x,int n)
+
 {
-    unsigned int x;
-    int n;
-    
-    printf("Enter the number:\nx: ");
-    scanf("%d", &x);
-    printf("n: ");
-    scanf("%d", &n);
-    printf("%d\n", rightrot(x, n));
-    return 0;
+
+int i;
+
+for (i=0;i<n;i++) {
+
+if ((x & 1)==1)
+
+x= (x >>1) | ~(~0>>1); 
+
+else
+
+x=x>>1;
+
 }
-int countbits(unsigned x)
-{
-    int count;
-    for(count=1; x>=2; count++)
-        x/=2;
-    return count;
+
+return x;
+
 }
-unsigned  int rightrot(unsigned int x, int n)
+
+
+
+
+
+main ()
+
 {
-    int bit, i;
-    i = countbits(x);
-    if(n>i)
-        n %=i;
-    bit = (x&((~((~0>>n)<<n))))<<(countbits(x)-n);
-    return (x>>n)|bit;
-    
+
+unsigned rightrot(unsigned ,int);
+
+unsigned x;
+
+int n;
+
+scanf("%u %d",&x,&n);
+
+printf("(%u,%d)=%u",x,n,rightrot(x,n));
+
+system("pause");
+
 }
