@@ -1,92 +1,97 @@
-#include <iostream>
+#include <stdio.h>
 
-#include <string>
-
-#include <fstream>
-
-using namespace std;
+#include <locale.h>
 
 
 
-Encrypt (string key,string fname, string oname){
 
-ifstream fin;
 
-char c;
-
-int keyi;
-
-    for (int i=0;i < key.size();i++)
-
-        keyi*=key[i];
-
-string kname=oname;
-
-oname.append(".cxpt");
-
-kname.append(".ckey");
-
-ofstream fo, keyo(kname.c_str());
-
-fin.open(fname.c_str());
-
-fo.open(oname.c_str());
+int main()
 
 
 
-while(fin >> std::noskipws >> c)
+	{setlocale(LC_CTYPE, "Russian");
 
-    {
+	char file1[251], key[100];
 
-    c=c^keyi;
+	int i;
 
-    fo<<c;
+	FILE*f1;
 
-        }
+	FILE*f2;
 
-            keyo<<keyi<<endl<<oname<<endl<<fname<<endl<<key;
+	int fsize = 0, dsize = 0;
+
+	char * wa1;
+
+	for (i = 0; i < 255; i++)
+
+		file1[i] = '\0';
+
+	for (i = 0; i < 100; i++)
+
+		key[i] = '\0';
+
+	printf("enter the key : ");
+
+	gets(key);
+
+	printf("the path to the fail  (e.g : C:\/Papka\/file.xls): ");
+
+	gets(file1);
+
+	for (i = 0; ;i++)
+
+	{
+
+		if (key[i] == '\0') break;
+
+		dsize++;
+
+	}
+
+	f1 = fopen(file1, "rb");
+
+	fseek(f1, 0, SEEK_END);
+
+	fsize = ftell(f1);
+
+	rewind(f1);
+
+	wa1 = (char *)malloc(fsize);
+
+	fread(wa1, 1, fsize, f1);
+
+	fclose(f1);
+
+	int index = 0;
+
+	for (i = 0; i < fsize; i++)
+
+	{
+
+		if (index == dsize) index = 0;
+
+		wa1[i] ^= key[index];
+
+		index++;
+
+	}
+
+	f2 = fopen(file1, "w");
+
+
+
+	fwrite(wa1, 1, fsize, f2);
+
+
+
+	fclose(f2);
+
+	free(wa1);
+
+	printf("encryption operation");
+
+	return 0;
 
 }
-
-
-
-
-
-int main(){
-
-string in,key,fname,oname;
-
-//initializes more variables
-
-cout<<"What is the file name?"<<endl;
-
-getline(cin,fname);
-
-cout<<"What will the output file be?"<<endl;
-
-getline(cin,oname);
-
-check:
-
-cout<<"Enter an encryption key."<<endl;
-
-getline(cin,key);
-
-if (key=="1") {cout<<"Invalid key, enter a different one"<<endl; goto check;}
-
-// inputting one doesn't decrypt properly
-
-Encrypt (key,fname,oname);
-
-cout<<"The file has been encrypted/decrypted."<<endl;
-
-string wait;
-
-getline(cin,wait);
-
-//input to pause before closing program
-
-return 0;
-
-}
-
