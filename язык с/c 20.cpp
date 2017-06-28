@@ -1,97 +1,43 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
-#include <locale.h>
-
-
-
-
-
+ 
 int main()
-
-
-
-	{setlocale(LC_CTYPE, "Russian");
-
-	char file1[251], key[100];
-
-	int i;
-
-	FILE*f1;
-
-	FILE*f2;
-
-	int fsize = 0, dsize = 0;
-
-	char * wa1;
-
-	for (i = 0; i < 255; i++)
-
-		file1[i] = '\0';
-
-	for (i = 0; i < 100; i++)
-
-		key[i] = '\0';
-
-	printf("enter the key : ");
-
-	gets(key);
-
-	printf("the path to the fail  (e.g : C:\/Papka\/file.xls): ");
-
-	gets(file1);
-
-	for (i = 0; ;i++)
-
-	{
-
-		if (key[i] == '\0') break;
-
-		dsize++;
-
-	}
-
-	f1 = fopen(file1, "rb");
-
-	fseek(f1, 0, SEEK_END);
-
-	fsize = ftell(f1);
-
-	rewind(f1);
-
-	wa1 = (char *)malloc(fsize);
-
-	fread(wa1, 1, fsize, f1);
-
-	fclose(f1);
-
-	int index = 0;
-
-	for (i = 0; i < fsize; i++)
-
-	{
-
-		if (index == dsize) index = 0;
-
-		wa1[i] ^= key[index];
-
-		index++;
-
-	}
-
-	f2 = fopen(file1, "w");
-
-
-
-	fwrite(wa1, 1, fsize, f2);
-
-
-
-	fclose(f2);
-
-	free(wa1);
-
-	printf("encryption operation");
-
-	return 0;
-
+{     FILE *fp,*fp1;
+       char ch, ni[81], srcfile[21];
+       char mi[5]={'C','H','I','N','A'};                     
+       int i;
+       printf("please input a file name:");
+    gets(srcfile);                                                 
+       printf("please input a string(< 80 chars):");
+    gets(ni);                                                       
+ 
+       if((fp = fopen(srcfile, "w")) == NULL)        
+    {   printf("open file error\n");                       
+         exit(0);
+    }
+ 
+       i=0;
+       while((ch=ni[i])!='\0'){                              
+              ch=ch^mi[i%5];                                 
+              fputc(ch,fp);                                      
+              i++;
+       }
+       fclose(fp);                                                
+ 
+       if((fp1 = fopen(srcfile, "r")) == NULL)       
+    {   printf("open file error\n");                   
+         exit(0);
+    }
+       i=0;
+       while((ch = fgetc(fp1)) !=EOF){               
+              ch=ch^mi[i%5];                                 
+              printf("%c",ch);                               
+              i++;
+       }
+       fclose(fp1);                                              
+       printf("\n");
+ 
+    return(0);
 }
