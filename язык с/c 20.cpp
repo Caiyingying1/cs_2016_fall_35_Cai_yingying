@@ -1,49 +1,92 @@
-#include <stdio.h>
+#include <iostream>
 
-#include <stdlib.h>
+#include <string>
 
-#include <stdio.h>
+#include <fstream>
 
-unsigned rightrot(unsigned x,int n)
+using namespace std;
 
-{
 
-int i;
 
-for (i=0;i<n;i++) {
+Encrypt (string key,string fname, string oname){
 
-if ((x & 1)==1)
+ifstream fin;
 
-x= (x >>1) | ~(~0>>1); 
+char c;
 
-else
+int keyi;
 
-x=x>>1;
+    for (int i=0;i < key.size();i++)
+
+        keyi*=key[i];
+
+string kname=oname;
+
+oname.append(".cxpt");
+
+kname.append(".ckey");
+
+ofstream fo, keyo(kname.c_str());
+
+fin.open(fname.c_str());
+
+fo.open(oname.c_str());
+
+
+
+while(fin >> std::noskipws >> c)
+
+    {
+
+    c=c^keyi;
+
+    fo<<c;
+
+        }
+
+            keyo<<keyi<<endl<<oname<<endl<<fname<<endl<<key;
 
 }
 
-return x;
+
+
+
+
+int main(){
+
+string in,key,fname,oname;
+
+//initializes more variables
+
+cout<<"What is the file name?"<<endl;
+
+getline(cin,fname);
+
+cout<<"What will the output file be?"<<endl;
+
+getline(cin,oname);
+
+check:
+
+cout<<"Enter an encryption key."<<endl;
+
+getline(cin,key);
+
+if (key=="1") {cout<<"Invalid key, enter a different one"<<endl; goto check;}
+
+// inputting one doesn't decrypt properly
+
+Encrypt (key,fname,oname);
+
+cout<<"The file has been encrypted/decrypted."<<endl;
+
+string wait;
+
+getline(cin,wait);
+
+//input to pause before closing program
+
+return 0;
 
 }
 
-
-
-
-
-main ()
-
-{
-
-unsigned rightrot(unsigned ,int);
-
-unsigned x;
-
-int n;
-
-scanf("%u %d",&x,&n);
-
-printf("(%u,%d)=%u",x,n,rightrot(x,n));
-
-system("pause");
-
-}
