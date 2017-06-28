@@ -6,7 +6,7 @@ main()
 
 int n=0,i,j; 
 
-char a[10]; 
+char a[20]; 
 
 printf("write sentence£º\n"); 
 
